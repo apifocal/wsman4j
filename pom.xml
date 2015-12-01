@@ -8,16 +8,19 @@
   <version>1.0-SNAPSHOT</version>
   
   <packaging>pom</packaging>
-  <name>WS-Management for Java :: Root POM</name>
+  <name>WSMan4j :: Root</name>
 
-  <properties>
-    <commons.io.version>2.4</commons.io.version>
-    <cxf.version>3.1.0</cxf.version>
-    <guava.version>18.0</guava.version>
-  </properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+
+        <cxf.version>3.1.4</cxf.version>
+    </properties>
 
   <modules>
     <module>wsman-api</module>
+    <module>wsman-cli</module>
   </modules>
 
 </project>
