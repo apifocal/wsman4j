@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.mycompany</groupId>
+
+    <parent>
+        <groupId>com.apifocal</groupId>
+        <artifactId>wsman4j</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
     <artifactId>wsman-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
@@ -23,13 +29,14 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
         </dependency>
-            <!-- Jetty is needed if you're are not using the CXFServlet -->
+        <!-- Jetty is needed if you're are not using the CXFServlet -->
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
             <version>${cxf.version}</version>
         </dependency>
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
