@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <!-- TODO: apifocal parent pom -->
-  <groupId>org.apifocal</groupId>
-  <artifactId>wsman4j</artifactId>
-  <version>1.0-SNAPSHOT</version>
+    <!-- TODO: apifocal parent pom -->
+    <groupId>org.apifocal</groupId>
+    <artifactId>wsman4j</artifactId>
+    <version>1.0-SNAPSHOT</version>
   
-  <packaging>pom</packaging>
-  <name>WSMan4j</name>
+    <packaging>pom</packaging>
+    <name>WSMan4j</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,9 +18,9 @@
         <cxf.version>3.1.4</cxf.version>
     </properties>
 
-  <modules>
-    <module>wsman-api</module>
-    <module>wsman-cli</module>
-  </modules>
+    <modules>
+        <module>wsman-api</module>
+        <module>wsman-cli</module>
+    </modules>
 
 </project>
