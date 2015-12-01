@@ -2,7 +2,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- TODO: apifocal parent pom -->
+    <!-- TODO: move some stuff into a new apifocal parent pom -->
+
     <groupId>org.apifocal</groupId>
     <artifactId>wsman4j</artifactId>
     <version>1.0-SNAPSHOT</version>
@@ -17,6 +18,11 @@
 
         <cxf.version>3.1.4</cxf.version>
     </properties>
+
+    <organization>
+        <name>apifocal</name>
+        <url>http://www.apifocal.com/</url>
+    </organization>
 
     <licenses>
         <license>
