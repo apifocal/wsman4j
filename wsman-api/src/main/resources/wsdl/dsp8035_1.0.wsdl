@@ -55,7 +55,7 @@ Change log:
     targetNamespace="http://schemas.xmlsoap.org/ws/2004/09/transfer" 
     xmlns:tns="http://schemas.xmlsoap.org/ws/2004/09/transfer" 
     xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" 
-	  xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
+    xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
     xmlns:xs="http://www.w3.org/2001/XMLSchema">
  
@@ -63,7 +63,7 @@ Change log:
     <xs:schema>
       <xs:import 
         namespace="http://schemas.xmlsoap.org/ws/2004/09/transfer"
-        schemaLocation="http://schemas.dmtf.org/wbem/wsman/1/dsp8031_1.0.xsd"
+        schemaLocation="dsp8031_1.0.xsd"
         />
     </xs:schema>
   </wsdl:types>
