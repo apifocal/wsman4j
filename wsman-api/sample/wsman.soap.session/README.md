@@ -1,0 +1,6 @@
+#wsman soap session example
+
+SOAP requests/responses for a simple wsman session that executes
+```
+ipconfig /all
+```

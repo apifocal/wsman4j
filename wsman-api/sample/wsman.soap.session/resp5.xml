@@ -1,0 +1,10 @@
+
+<s:Envelope xml:lang="en-US" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:w="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd" xmlns:p="http://schemas.microsoft.com/wbem/wsman/1/wsman.xsd">
+	<s:Header>
+		<a:Action>http://schemas.xmlsoap.org/ws/2004/09/transfer/DeleteResponse</a:Action>
+		<a:MessageID>uuid:8E2A9E4C-6D09-4DB1-A33F-6A3445B4249A</a:MessageID>
+		<a:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:To>
+		<a:RelatesTo>uuid:43950122-ac6c-45ca-8741-377e67698c4b</a:RelatesTo>
+	</s:Header>
+	<s:Body/>
+</s:Envelope>
