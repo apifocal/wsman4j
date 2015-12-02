@@ -46,7 +46,6 @@
                             <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-<!--                                    <wsdl>${basedir}/src/main/resources/wsdl/dsp8035_1.0.wsdl</wsdl>-->
                                     <wsdl>${basedir}/src/main/resources/wsdl/winRM.wsdl</wsdl>
                                 </wsdlOption>
                             </wsdlOptions>
