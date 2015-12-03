@@ -1,7 +1,7 @@
 package com.apifocal.wsman.cli;
 
 /**
- *
+ * wsman soap protocol
  */
 public class Protocol {
 
