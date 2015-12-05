@@ -17,12 +17,14 @@ package com.apifocal.wsman.cli;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.kohsuke.args4j.Option;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.CmdLineException;
+import org.kohsuke.args4j.spi.StringArrayOptionHandler;
 
 /**
  * wsman client application
@@ -47,6 +49,9 @@ public class WsmanCli {
     @Option(name = "-cmd", usage = "Sets a command")
     public String cmd;
     
+    @Option(name = "-cmdargs", handler = StringArrayOptionHandler.class, required = true)
+    private List<String> cmdArgs;
+    
     @Option(name = "-ps", usage = "Sets a powershell script")
     public String ps;
 
@@ -64,7 +69,7 @@ public class WsmanCli {
         Session s = new Session(endpoint, transport);
         
         if (!cmd.isEmpty())
-            s.runCmd(cmd);
+            s.runCmd(cmd, cmdArgs.toArray(new String[cmdArgs.size()]));
         
         if (!ps.isEmpty())
             s.runPs(ps);
