@@ -1,17 +1,17 @@
 package com.apifocal.wsman.cli;
 
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
 /**
  * establish a wsman session using a {@link Protocol}
  */
-public class Session {
+public class Session {    
     Protocol protocol;
 
-    public Session(String target, String user, String password, String transport) {
-        String url = buildUrl(target, transport);
-        protocol = new Protocol(url, transport, user, password);
+    public Session(URL url, EnumTransport transport) {
+        protocol = new Protocol(url, transport);
     }
 
     /* execute cmd instructions */
@@ -35,10 +35,6 @@ public class Session {
         return rs;
     }
     
-    private String buildUrl(String target, String transport) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }    
-
     /* converts a Powershell CLIXML message to a more human readable string */
     private String cleanErrorMsg(String std_err) {
         throw new UnsupportedOperationException("Not supported yet.");
