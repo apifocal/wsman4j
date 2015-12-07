@@ -7,6 +7,7 @@ import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.dmtf.schemas.wbem.wsman._1.wsman.Shell;
 import org.dmtf.schemas.wbem.wsman._1.wsman_xsd.WSMAN;
 import org.xmlsoap.schemas.ws._2004._09.transfer.AnyXmlType;
 
@@ -26,26 +27,24 @@ public class Protocol {
     }
 
     int openShell() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        //wsmanService.create(body);
+        //add SOAP headers
+        List<Header> headersList = new ArrayList<>();
+//        headersList.add(
+//            new Header(new QName("http://sachinhandiekar.com/ws/SampleWS", "userName"), "JohnDoe", new JAXBDataBinding(String.class))
+//        );
+        Client proxy = ClientProxy.getClient(wsmanService);
+        proxy.getRequestContext().put(Header.HEADER_LIST, headersList);
 
-        
-//        //add SOAP headers
-//        List<Header> headersList = new ArrayList<>();
-////        headersList.add(
-////            new Header(new QName("http://sachinhandiekar.com/ws/SampleWS", "userName"), "JohnDoe", new JAXBDataBinding(String.class))
-////        );
-//        Client proxy = ClientProxy.getClient(wsmanService);
-//        proxy.getRequestContext().put(Header.HEADER_LIST, headersList);
-//
-//        //add SOAP body
-//        AnyXmlType body = new AnyXmlType();
-//        //Shell shell = new Shell();
-//        //body.setAny(shell);
-//
-//        //invoke 'create' ws
-//
-//        return 0;
+        //add SOAP body
+        Shell shell = new Shell();
+//        shell.setShellId(null);
+
+        //invoke 'create' ws
+        AnyXmlType body = new AnyXmlType();
+        body.setAny(shell);
+        wsmanService.create(body);
+
+        return 0;
     }
 
     int runCommand(int shellId, String command, String[] args) {
