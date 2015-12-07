@@ -2,7 +2,7 @@ package com.apifocal.wsman.cli;
 
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.Base64;
+import org.apache.cxf.common.util.Base64Utility;
 
 /**
  * establish a wsman session using a {@link Protocol}
@@ -27,7 +27,7 @@ public class Session {
     /* encodes a Powershell script using base64 and executes the encoded script */
     public Response runPs(String script) {
         //TODO must use utf16 little endian on windows
-        String base64Script = Base64.getEncoder().encodeToString(script.getBytes(StandardCharsets.UTF_8));
+        String base64Script = Base64Utility.encode(script.getBytes(StandardCharsets.UTF_8));
         String command = String.format("powershell -encodedcommand %s", base64Script);
         Response rs = runCmd(command);
         if (!rs.std_err.isEmpty()) //if there was an error message, clean it it up and make it human readable
