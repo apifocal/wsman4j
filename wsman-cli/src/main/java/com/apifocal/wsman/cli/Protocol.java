@@ -18,7 +18,7 @@ public class Protocol {
     
     private WSMAN wsmanService;
 
-    Protocol(URL url, EnumTransport transport) {
+    Protocol(URL url, Transport transport) {
         final JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(WSMAN.class);
         factory.setAddress(url.toString());

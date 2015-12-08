@@ -10,7 +10,7 @@ import org.apache.cxf.common.util.Base64Utility;
 public class Session {    
     Protocol protocol;
 
-    public Session(URL url, EnumTransport transport) {
+    public Session(URL url, Transport transport) {
         protocol = new Protocol(url, transport);
     }
 

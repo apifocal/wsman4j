@@ -44,35 +44,43 @@ public class WsmanCli {
     public String pass;
 
     @Option(name = "-transport", usage = "Sets a transport")
-    public EnumTransport transport = EnumTransport.plaintext;
+    public Transport transport = Transport.plaintext;
 
     @Option(name = "-cmd", usage = "Sets a command")
     public String cmd;
-    
-    @Option(name = "-cmdargs", handler = StringArrayOptionHandler.class, required = true)
-    private List<String> cmdArgs;
-    
-    @Option(name = "-ps", usage = "Sets a powershell script")
-    public String ps;
 
-    public void run() throws MalformedURLException {
-        final String protocol = transport == EnumTransport.ssl ? "https" : "http";
+    @Option(name = "-cmdArgs", handler = StringArrayOptionHandler.class, required = true)
+    public List<String> cmdArgs = null;
+
+    @Option(name = "-ps", usage = "Sets a powershell script")
+    public String ps = null;
+
+    public Session createSession() throws MalformedURLException {
+        final String protocol = transport == Transport.ssl ? "https" : "http";
         if (port == 0) {
-            port = transport == EnumTransport.ssl ? 5986 : 5985;
+            port = transport == Transport.ssl ? 5986 : 9985;
         }
 
         URL endpoint = new URL(protocol, host, port, "/wsman");
 
         System.out.println("Connecting to " + endpoint.toString());
 
-        //execute wsman shell commands
         Session s = new Session(endpoint, transport);
-        
-        if (!cmd.isEmpty())
+
+        return s;
+    }
+
+    public void run() throws MalformedURLException {
+        Session s = createSession();
+
+        //execute wsman shell commands
+        if (!cmd.isEmpty()) {
             s.runCmd(cmd, cmdArgs.toArray(new String[cmdArgs.size()]));
-        
-        if (!ps.isEmpty())
+        }
+
+        if (!ps.isEmpty()) {
             s.runPs(ps);
+        }
     }
 
     //entry point

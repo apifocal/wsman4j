@@ -15,7 +15,7 @@
  */
 package com.apifocal.wsman.cli;
 
-enum EnumTransport 
+public enum Transport 
 {
     plaintext, 
     ssl, 
