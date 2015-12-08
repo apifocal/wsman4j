@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxb:bindings
+    xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" 
+    xmlns:xs="http://www.w3.org/2001/XMLSchema"
+    xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:annox="http://annox.dev.java.net"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/jaxb http://java.sun.com/xml/ns/jaxb/bindingschema_2_0.xsd"
+    jaxb:extensionBindingPrefixes="xjc annox"
+    version="2.1">
+  
+    <jaxb:globalBindings>
+        <jaxb:javaType
+            name="java.util.Calendar"
+            xmlType="xs:dateTime"
+            parseMethod="javax.xml.bind.DatatypeConverter.parseDateTime"
+            printMethod="javax.xml.bind.DatatypeConverter.printDateTime"
+        />
+        <jaxb:javaType
+            name="java.util.Calendar"
+            xmlType="xs:date"
+            parseMethod="javax.xml.bind.DatatypeConverter.parseDate"
+            printMethod="javax.xml.bind.DatatypeConverter.printDate"
+        />
+    </jaxb:globalBindings>  
+
+    <!-- Application of annotations to selected classes within schemas -->
+
+    <!-- org.dmtf.schemas.wbem.wsman._1.wsman.Shell @XmlRootElement -->
+    <jaxb:bindings schemaLocation="../wsdl/winRM.wsdl" node="*/xs:schema[7]">
+        <jaxb:bindings node="xs:complexType[@name='Shell']">
+            <annox:annotate>
+                <annox:annotate annox:class="javax.xml.bind.annotation.XmlRootElement" name="Shell"/>
+            </annox:annotate>
+        </jaxb:bindings>
+    </jaxb:bindings>
+
+</jaxb:bindings>

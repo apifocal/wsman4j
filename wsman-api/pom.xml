@@ -34,6 +34,7 @@
 
     <build>
         <plugins>
+            <!-- use cxf to generate webservice proxies for winrm.wsdl and related schemas -->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
@@ -56,6 +57,8 @@
                     </execution>
                 </executions>
             </plugin>
+            
+            <!-- include cxf generated files in the project's compile phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
@@ -75,8 +78,27 @@
                     </execution>
                 </executions>
             </plugin>
+                                    
+            <!-- additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl -->
+            <plugin>
+                <groupId>org.jvnet.jaxb2.maven2</groupId>
+                <artifactId>maven-jaxb2-plugin</artifactId>
+                <version>0.13.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <extension>true</extension>
+                    <bindingIncludes>
+                        <include>src/main/resources/xjb/shell-bindings.xjb</include>
+                    </bindingIncludes>
+                    <strict>false</strict>
+                </configuration>
+            </plugin>
         </plugins>
-
-    </build>
-    
+    </build>    
 </project>
