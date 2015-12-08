@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.apifocal.wsman.cli;
+package org.apifocal.wsman.cli;
 
 public enum Transport 
 {

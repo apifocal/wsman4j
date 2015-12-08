@@ -15,7 +15,10 @@
  */
 package org.apifocal.wsman.tests;
 
-import com.apifocal.wsman.cli.*;
+import org.apifocal.wsman.cli.WsmanCli;
+import org.apifocal.wsman.cli.Response;
+import org.apifocal.wsman.cli.Session;
+import org.apifocal.wsman.cli.Transport;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Arrays;

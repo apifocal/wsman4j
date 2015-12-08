@@ -1,4 +1,4 @@
-package com.apifocal.wsman.cli;
+package org.apifocal.wsman.cli;
 
 import java.net.URL;
 import java.util.ArrayList;

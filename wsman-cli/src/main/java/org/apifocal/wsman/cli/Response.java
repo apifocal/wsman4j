@@ -1,4 +1,4 @@
-package com.apifocal.wsman.cli;
+package org.apifocal.wsman.cli;
 
 /**
  * Output of an executed wsman command.
