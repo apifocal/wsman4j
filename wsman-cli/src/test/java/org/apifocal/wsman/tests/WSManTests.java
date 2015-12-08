@@ -40,17 +40,13 @@ public class WSManTests {
     }
 
     @BeforeClass
-    public static void setUpClass() {
+    public static void setUpClass() throws IOException {
         //test is only runnable in a windows host
         boolean isWindows = System.getProperty("os.name").startsWith("Windows");
         org.junit.Assume.assumeTrue(isWindows); //failure causes the test to be ignored
 
         //configure WinRM
-        try {
-            Runtime.getRuntime().exec("cmd /c start setupWinRM.bat");
-        } catch (IOException ex) {
-            Logger.getLogger(WSManTests.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        Runtime.getRuntime().exec("cmd /c start setupWinRM.bat");
     }
 
     @AfterClass
