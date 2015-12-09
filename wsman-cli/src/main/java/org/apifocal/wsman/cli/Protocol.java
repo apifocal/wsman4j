@@ -3,6 +3,8 @@ package org.apifocal.wsman.cli;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import javax.xml.bind.JAXBElement;
+import javax.xml.namespace.QName;
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.headers.Header;
@@ -37,12 +39,14 @@ public class Protocol {
 
         //add SOAP body
         Shell shell = new Shell();
-//        shell.setShellId(null);
+        shell.getOutputStreams().add("stdout stderr");
+        shell.getInputStreams().add("stdin");
 
         //invoke 'create' ws
+        JAXBElement<Shell> s = new JAXBElement<Shell>(new QName("http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd", "Shell", "rsp"), Shell.class, shell);
         AnyXmlType body = new AnyXmlType();
-        body.setAny(shell);
-        wsmanService.create(body);
+        body.setAny(s);
+        wsmanService.create(body); //ws call
 
         return 0;
     }
