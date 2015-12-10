@@ -49,7 +49,7 @@
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/wsdl/winRM.wsdl</wsdl>
                                     <extraargs>
-<!--                                        <extraarg>-validate</extraarg>-->
+                                        <extraarg>-validate</extraarg>
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
@@ -60,7 +60,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+                        
             <!-- include cxf generated files in the project's compile phase -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>

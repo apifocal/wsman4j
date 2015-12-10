@@ -3,12 +3,15 @@ package org.apifocal.wsman.cli;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.namespace.QName;
+
 import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.frontend.ClientProxy;
 import org.apache.cxf.headers.Header;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
+import org.dmtf.schemas.wbem.wsman._1.wsman.CommandResponse;
 import org.dmtf.schemas.wbem.wsman._1.wsman.Shell;
 import org.dmtf.schemas.wbem.wsman._1.wsman_xsd.WSMAN;
 import org.xmlsoap.schemas.ws._2004._09.transfer.AnyXmlType;
@@ -42,11 +45,7 @@ public class Protocol {
         shell.getOutputStreams().add("stdout stderr");
         shell.getInputStreams().add("stdin");
 
-        //invoke 'create' ws
-        JAXBElement<Shell> s = new JAXBElement<Shell>(new QName("http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd", "Shell", "rsp"), Shell.class, shell);
-        AnyXmlType body = new AnyXmlType();
-        body.setAny(s);
-        wsmanService.create(body); //ws call
+        wsmanService.create(shell); //ws call
 
         return 0;
     }
@@ -56,7 +55,7 @@ public class Protocol {
         //wsmanService.command(body);
     }
 
-    Response getCommandOutput(int shellId, int commandId) {
+    CommandResponse getCommandOutput(int shellId, int commandId) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         //wsmanService.receive(body);
     }
