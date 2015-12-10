@@ -1,0 +1,25 @@
+Windows Remote Management Command Line Tool
+
+winrm set RESOURCE_URI [-SWITCH:VALUE [-SWITCH:VALUE] ...]
+          [@{KEY="VALUE"[;KEY="VALUE"]}]
+          [-file:VALUE]
+
+Modifies settings in RESOURCE_URI using specified switches
+and input of changed values via key-value pairs or updated 
+object via an input file.
+
+Example: Modify a configuration property of WinRM:
+  winrm set winrm/config @{MaxEnvelopeSizekb="100"}
+
+Example: Disable a listener on this machine:
+  winrm set winrm/config/Listener?Address=*+Transport=HTTPS @{Enabled="false"}
+
+Example: Disable a certmapping entry on this machine:
+  Winrm set winrm/config/service/certmapping?Issuer=1212131238d84023982e381f20391a2935301923+Subject=*.example.com+URI=wmicimv2/* @{Enabled="false"}
+
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help input
+  winrm help switches

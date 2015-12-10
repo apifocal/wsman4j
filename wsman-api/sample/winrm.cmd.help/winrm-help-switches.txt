@@ -1,0 +1,80 @@
+Windows Remote Management Command Line Tool
+
+-timeout:MS
+-----------
+Timeout in milliseconds. Limits duration of corresponding operation.
+Default timeout can be configured by:
+  winrm set winrm/config @{MaxTimeoutms="XXXXXX"}
+Where XXXXXX is an integer indicating milliseconds.
+
+-skipCAcheck
+------------
+Specifies that certificate issuer need not be a trusted root authority.
+Used only in remote operations using HTTPS (see -remote option).
+This option should be used only for trusted machines.
+
+-skipCNcheck
+------------
+Specifies that certificate common name (CN) of the server need not match the
+hostname of the server. 
+Used only in remote operations using HTTPS (see -remote option).
+This option should be used only for trusted machines.
+
+-skipRevocationcheck
+-------------------
+Specifies that the revocation status of the server certificate is not checked.
+Used only in remote operations using HTTPS (see -remote option).
+This option should be used only for trusted machines.
+
+-defaultCreds
+-------------------
+Specifies that the implicit credentials are allowed when Negotiate is used.
+Allowed only in remote operations using HTTPS (see -remote option).
+
+-dialect:VALUE
+--------------
+Dialect of the filter expression for enumeration or fragment.
+Example: Use a WQL query
+  -dialect:http://schemas.microsoft.com/wbem/wsman/1/WQL
+Example: Use XPATH for filtering with enumeration or fragment get/set.
+  -dialect:http://www.w3.org/TR/1999/REC-xpath-19991116
+
+-fragment:VALUE
+---------------
+Specify a section inside the instance XML that is to be updated or retrieved
+for the given operation.
+Example: Get the status of the spooler service
+  winrm get wmicimv2/Win32_Service?name=spooler -fragment:Status/text()
+
+-options:{KEY="VALUE"[;KEY="VALUE"]}
+------------------------------------
+Key/value pairs for provider-specific options.
+To specify NULL as a value, use $null
+
+Examples:
+  -options:{key1="value1";key2="value2"}
+  -options:{key1=$null;key2="value2"}
+
+-SPNPort
+--------
+Appends port number to the Service Principal Name (SPN) of the remote server.
+Service principal name is used when Negotiate or Kerberos authentication
+mechanism is in use.
+
+-encoding:VALUE
+---------------
+Specifies encoding type when talking to remote machine (see -remote
+option). Possible options are "utf-8" and "utf-16".
+Default is utf-8.
+Examples:
+  -encoding:utf-8
+  -encoding:utf-16
+
+-f[ormat]:FORMAT
+----------------
+Specifies format of output.
+FORMAT can be "xml", "pretty" (better formatted XML), or "text".
+Examples:
+  -format:xml
+  -format:pretty
+  -format:text

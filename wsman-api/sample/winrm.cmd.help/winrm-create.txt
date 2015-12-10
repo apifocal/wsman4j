@@ -1,0 +1,28 @@
+Windows Remote Management Command Line Tool
+
+winrm create RESOURCE_URI [-SWITCH:VALUE [-SWITCH:VALUE] ...]
+             [@{KEY="VALUE"[;KEY="VALUE"]}]
+             [-file:VALUE]
+
+Spawns an instance of RESOURCE_URI using specified 
+key-value pairs or input file.
+
+Example: Create instance of HTTP Listener on IPv6 address:
+  winrm create winrm/config/Listener?Address=IP:3ffe:8311:ffff:f2c1::5e61+Transport=HTTP
+
+Example: Create instance of HTTPS Listener on all IPs:
+  winrm create winrm/config/Listener?Address=*+Transport=HTTPS @{Hostname="HOST";CertificateThumbprint="XXXXXXXXXX"}
+Note: XXXXXXXXXX represents a 40-digit hex string; see help config.
+
+Example: Create a windows shell command instance from xml:
+  winrm create shell/cmd -file:shell.xml -remote:srv.corp.com
+
+Example: Create a CertMapping entry:
+  winrm create winrm/config/service/certmapping?Issuer=1212131238d84023982e381f20391a2935301923+Subject=*.example.com+URI=wmicimv2/* @{UserName="USERNAME";Password="PASSWORD"} -remote:localhost
+
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help input
+  winrm help switches

@@ -1,0 +1,31 @@
+Windows Remote Management Command Line Tool
+
+Input can be by either providing key/value pairs directly on the command line
+or reading XML from a file.
+
+  winrm OPERATION -file:VALUE 
+  winrm OPERATION @{KEY="VALUE"[;KEY="VALUE"]}
+
+Applies to set, create, and invoke operations.
+Use either @{KEY=VALUE} or input from an XML file, but not both.
+
+-file:VALUE
+-----------
+Specifies name of file used as input.
+VALUE can be absolute path, relative path, or filename without path.
+Names or paths that include spaces must be enclosed in quotation marks.
+
+@{KEY="VALUE"[;KEY="VALUE"]}
+----------------------------
+Keys are not unique.
+Values must be within quotation marks.
+$null is a special value.
+
+Examples:
+  @{key1="value1";key2="value2"}
+  @{key1=$null;key2="value2"}
+
+See also:
+  winrm set -?
+  winrm create -?
+  winrm invoke -?

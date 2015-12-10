@@ -1,0 +1,77 @@
+Windows Remote Management Command Line Tool
+
+winrm OPERATION -remote:VALUE 
+  [-authentication:VALUE] 
+  [-username:USERNAME] 
+  [-password:PASSWORD]
+  [-certificate:THUMBPRINT]
+
+When connecting remotely, you can specify which credentials and which
+authentication mechanisms to use.  If none are specified the current 
+logged-on user's credentials will be used.
+
+-a[uthentication]:VALUE
+-----------------------
+Specifies authentication mechanism used when communicating with remote machine.
+Possible options are None, Basic, Digest, Negotiate, Kerberos, CredSSP.
+Examples:
+  -a:None
+  -a:Basic
+  -a:Digest
+  -a:Negotiate
+  -a:Kerberos
+  -a:Certificate
+  -a:CredSSP
+Note: If an authentication mechanism is not specified, Kerberos is used unless
+      one of the conditions below is true, in which case Negotiate is used:
+   -explicit credentials are supplied and the destination host is trusted
+   -the destination host is "localhost", "127.0.0.1" or "[::1]"
+   -the client computer is in workgroup and the destination host is trusted
+Note: Not all authentication mechanisms are enabled by default.  Allowed
+      authentication mechanisms can be controlled by local configuration 
+      or group policy.
+Note: Most operations will require an authentication mode other than None.
+Note: Certificate authentication can be used only with the HTTPS transport.
+      To configure an HTTPS listener for the WinRM service run the command:
+      "winrm quickconfig -transport:HTTPS"
+
+-u[sername]:USERNAME
+--------------------
+Specifies username on remote machine. Cannot be used on local machine.
+User must be member of local Administrators group on remote machine.
+If the user account is a local account on the remote machine,
+the syntax should be in the form -username:USERNAME
+If the username is a domain account, the syntax should be in the form
+-username:DOMAIN\USERNAME
+If Basic or Digest is used, then -username is required.
+If Kerberos is used, then the current logged-on user's credentials
+are used if -username is not supplied. Only domain credentials can
+be used with Kerberos.
+If Negotiate is used, then -username is required unless
+one of the conditions below is true:
+   -the destination host is "localhost", "127.0.0.1" or "[::1]"
+   -the client computer is in workgroup and the destination host is trusted
+If CredSSP is used, then username and password are required.
+
+-p[assword]:PASSWORD
+--------------------
+Specifies password on command line to override interactive prompt.
+Applies only if -username:USERNAME option is used.
+
+-c[ertificate]:THUMBPRINT
+--------------------
+Specifies the thumbprint of a certificate that must exist in the local
+machine store or in the current user store. The certificate must be intended
+for client authentication.
+Applies only if -a:Certificate is used.
+THUMBPRINT can contain spaces, in which case it must be enclosed in
+double quotation marks.
+Examples:
+-c:7b0cf48026409e38a2d6348761b1dd1271c4f86d
+-c:"7b 0c f4 80 26 40 9e 38 a2 d6 34 87 61 b1 dd 12 71 c4 f8 6d"
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help input
+  winrm help switches

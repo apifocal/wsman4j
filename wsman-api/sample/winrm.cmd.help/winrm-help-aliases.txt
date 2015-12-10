@@ -1,0 +1,20 @@
+Windows Remote Management Command Line Tool
+
+Aliasing allows shortcuts to be used in place of full Resource URIs.
+Available aliases and the Resource URIs they substitute for are:
+
+wmi      = http://schemas.microsoft.com/wbem/wsman/1/wmi
+wmicimv2 = http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2
+cimv2    = http://schemas.dmtf.org/wbem/wscim/1/cim-schema/2
+winrm    = http://schemas.microsoft.com/wbem/wsman/1
+wsman    = http://schemas.microsoft.com/wbem/wsman/1
+shell    = http://schemas.microsoft.com/wbem/wsman/1/windows/shell
+
+Example: using full Resource URI:
+  winrm get http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Service?Name=WinRM
+
+Example: using alias:
+  winrm get wmicimv2/Win32_Service?Name=WinRM
+
+See also:
+  winrm help aliases

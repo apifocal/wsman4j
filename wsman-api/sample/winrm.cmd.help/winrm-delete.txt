@@ -1,0 +1,17 @@
+Windows Remote Management Command Line Tool
+
+winrm delete RESOURCE_URI [-SWITCH:VALUE [-SWITCH:VALUE] ...]
+
+Removes an instance of RESOURCE_URI.
+
+Example: delete the HTTP listener on this machine for given IP address:
+  winrm delete winrm/config/Listener?Address=IP:192.168.2.1+Transport=HTTP
+
+Example: delete a certmapping entry:
+  winrm delete winrm/config/service/certmapping?Issuer=1212131238d84023982e381f20391a2935301923+Subject=*.example.com+URI=wmicimv2/*
+
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help switches

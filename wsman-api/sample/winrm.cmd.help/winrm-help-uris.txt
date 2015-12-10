@@ -1,0 +1,36 @@
+Windows Remote Management Command Line Tool
+
+Universal Resource Identifiers (URI) specify management resources to be
+used for operations.
+
+Selectors and values are passed after the URI in the form:
+  RESOURCE_URI?NAME=VALUE[+NAME=VALUE]...
+
+URIs for all information in WMI are of the following form:
+  WMI path = \\root\NAMESPACE[\NAMESPACE]\CLASS
+  URI      = http://schemas.microsoft.com/wbem/wsman/1/wmi/root/NAMESPACE[/NAMESPACE]/CLASS
+  ALIAS    = wmi/root/NAMESPACE[/NAMESPACE]/CLASS
+
+Example: Get information about WinRM service from WMI using single selector
+  WMI path = \\root\cimv2\Win32_Service
+  URI      = http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Service?Name=WinRM
+  ALIAS    = wmi/root/cimv2/Win32_Service?Name=WinRM
+
+When enumerating WMI instances using a WQL filter,
+the CLASS must be "*" (star) and no selectors should be specified.
+Example:
+URI = http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/*
+
+When accesing WMI singleton instances, no selectors should be specified.
+Example:
+URI = http://schemas.microsoft.com/wbem/wsman/1/wmi/root/cimv2/Win32_Service
+
+Note: Some parts of RESOURCE_URI may be case-sensitive. When using create or
+invoke, the last part of the resource URI must match case-wise the top-level
+element of the expected XML.
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help input
+  winrm help switches

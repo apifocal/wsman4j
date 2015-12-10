@@ -1,0 +1,21 @@
+Windows Remote Management Command Line Tool
+
+winrm get RESOURCE_URI [-SWITCH:VALUE [-SWITCH:VALUE] ...]
+
+Retrieves instances of RESOURCE_URI using specified 
+options and key-value pairs.
+
+Example: Retrieve current configuration in XML format:
+  winrm get winrm/config -format:pretty
+
+Example: Retrieve spooler instance of Win32_Service class:
+  winrm get wmicimv2/Win32_Service?Name=spooler
+
+Example: Retrieve a certmapping entry on this machine:
+  winrm get winrm/config/service/certmapping?Issuer=1212131238d84023982e381f20391a2935301923+Subject=*.example.com+URI=wmicimv2/*
+
+
+See also:
+  winrm help uris
+  winrm help aliases
+  winrm help switches

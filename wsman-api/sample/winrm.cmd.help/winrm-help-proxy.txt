@@ -1,0 +1,53 @@
+Windows Remote Management Command Line Tool
+
+winrm OPERATION -remote:VALUE 
+  [-proxyaccess:VALUE] 
+  [-proxyauth:VALUE] 
+  [-proxyusername:USERNAME] 
+  [-proxypassword:PASSWORD]
+
+When connecting remotely, you can specify which proxy access type,
+ proxy credentials and proxy authentication mechanisms to use.
+-p[roxy]ac[cess]:VALUE
+-----------------------
+Specifies which proxy settings to retrieve when connecting to a remote machine.
+Possible options are ie_settings, winhttp_settings, auto_detect, no_proxy.
+Examples:
+  -pac:ie_settings
+  -pac:winhttp_settings
+  -pac:auto_detect
+  -pac:no_proxy
+
+The WSMan client provides four options for the configuration of proxy settings:
+   -use settings configured through Internet Explorer (default)
+   -use settings configured through WinHTTP
+   -automatic proxy discovery
+   -direct connection (don’t use a proxy)
+-p[roxy]a[uth]:VALUE
+-----------------------
+Specifies authentication mechanism used to authenticate with a proxy.
+Possible options are Basic, Digest, Negotiate.
+Examples:
+  -pa:Basic
+  -pa:Digest
+  -pa:Negotiate
+If -proxyauth:VALUE is used then -proxyaccess:VALUE is required.
+-p[roxy]u[sername]:USERNAME
+--------------------
+Specifies username to authenticate with proxy. Cannot be used on local machine.
+If the user account is a local account on the remote machine,
+the syntax should be in the form -proxyusername:USERNAME
+If the username is a domain account, the syntax should be in the form
+-proxyusername:DOMAIN\USERNAME
+If -proxyusername is used then -proxyauth:VALUE is required.
+-p[roxy]p[assword]:PASSWORD
+--------------------
+Specifies password on command line to override interactive prompt.
+Applies only if -proxyusername:USERNAME option is used.
+
+See also:
+  winrm help uris
+  winrm help auth
+  winrm help aliases
+  winrm help input
+  winrm help switches
