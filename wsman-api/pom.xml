@@ -82,7 +82,7 @@
                 </executions>
             </plugin>
                                     
-            <!-- additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl -->
+<!--             additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl 
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
@@ -101,7 +101,7 @@
                     </bindingIncludes>
                     <strict>false</strict>
                 </configuration>
-            </plugin>
+            </plugin>-->
         </plugins>
     </build>    
 </project>
