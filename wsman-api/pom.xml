@@ -34,7 +34,7 @@
 
     <build>
         <plugins>
-            <!-- use cxf to generate webservice proxies for winrm.wsdl and related schemas -->
+            <!-- use cxf to generate java webservice proxies from wsdl and related schemas -->
             <plugin>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-codegen-plugin</artifactId>
@@ -82,7 +82,7 @@
                 </executions>
             </plugin>
                                     
-<!--             additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl 
+            <!--             additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl 
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
@@ -102,6 +102,37 @@
                     <strict>false</strict>
                 </configuration>
             </plugin>-->
+            
+            <!-- use cxf to generate java from xsd -->
+            <plugin>
+                <groupId>org.apache.cxf</groupId>
+                <artifactId>cxf-xjc-plugin</artifactId>
+                <version>3.0.5</version>
+                <configuration>
+                    <extensions>
+                        <extension>org.apache.cxf.xjcplugins:cxf-xjc-dv:3.0.5</extension>
+                    </extensions>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>generate-sources</id>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>xsdtojava</goal>
+                        </goals>
+                        <configuration>
+                            <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
+                            <xsdOptions>
+                                <xsdOption>
+                                    <xsd>${basedir}/src/main/resources/wsdl/schemas/schemas.dmtf.org/wbem/wsman/1/wsman.xsd</xsd>
+                                    <packagename>org.dmtf.schemas.wbem.wsman._1.wsman_xsd</packagename>
+                                </xsdOption>
+                            </xsdOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
         </plugins>
     </build>    
 </project>
