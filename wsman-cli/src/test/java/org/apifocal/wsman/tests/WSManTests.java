@@ -15,29 +15,30 @@
  */
 package org.apifocal.wsman.tests;
 
+import java.io.FileNotFoundException;
 import org.apifocal.wsman.cli.WsmanCli;
 import org.apifocal.wsman.cli.Session;
 import org.apifocal.wsman.cli.Transport;
 import org.dmtf.schemas.wbem.wsman._1.wsman.CommandResponse;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
+import java.io.InputStream;
 import java.util.Arrays;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Properties;
 
 import org.junit.After;
 import org.junit.AfterClass;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
 
 /**
  *
  */
 public class WSManTests {
+    
+    private WsmanCli cli = new WsmanCli();
 
     public WSManTests() {
     }
@@ -48,8 +49,8 @@ public class WSManTests {
         boolean isWindows = System.getProperty("os.name").startsWith("Windows");
         org.junit.Assume.assumeTrue(isWindows); //failure causes the test to be ignored
 
-        //configure WinRM
-        Runtime.getRuntime().exec("cmd /c start setupWinRM.bat");
+        //make sure to configure WinRM prior to running tests
+        //Runtime.getRuntime().exec("cmd /c start setupWinRM.bat");        
     }
 
     @AfterClass
@@ -57,7 +58,22 @@ public class WSManTests {
     }
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
+        //load user configuration
+        Properties prop = new Properties();
+        InputStream is = getClass().getClassLoader().getResourceAsStream("configTests.properties");
+        if (is != null)
+            prop.load(is);
+        else
+            throw new FileNotFoundException("tests config file missing");
+        
+        cli.host = prop.getProperty("host");
+        cli.port = Integer.parseInt(prop.getProperty("port"));
+        cli.user = prop.getProperty("user");
+        cli.pass = prop.getProperty("pass");
+        cli.transport = Transport.plaintext;
+        //cli.cmd = prop.getProperty("cmd");
+        //cli.cmdArgs = Arrays.asList(prop.getProperty("cmdArgs").split(" "));        
     }
 
     @After
@@ -69,17 +85,8 @@ public class WSManTests {
     //
     @Test
     public void testWinRM() throws Exception {
-        WsmanCli w = new WsmanCli();
-        w.host = "localhost";
-        w.port = 5985;
-        w.user = "user";
-        w.pass = "password";
-        w.transport = Transport.plaintext;
-        //w.cmd
-        //w.cmdArgs
-
-        Session s = w.createSession();
+        Session s = cli.createSession();
         CommandResponse resp = s.runCmd("ipconfig", "/all");
-        // assertTrue(resp.statusCode == 0);
+        assertTrue(true);
     }
 }
