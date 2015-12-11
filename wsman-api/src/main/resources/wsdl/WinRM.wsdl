@@ -290,10 +290,7 @@
 					<xs:element name="Type" type="i:Type_Type" minOccurs="0"/>
 					<xs:element name="Value" type="i:InteractiveEventComplexType" minOccurs="0"/>
 				</xs:sequence>
-				<xs:anyAttribute
-                   process_contents="lax"
-                   namespace="##any"
-       />
+				<xs:anyAttribute namespace="##any" />
 			</xs:complexType>
 			<xs:simpleType name="ResponseType">
 				<xs:restriction base="xs:string">
@@ -308,10 +305,7 @@
 					<xs:element name="EventType" type="i:EventType_Type"/>
 					<xs:element name="Response" type="i:ResponseType"/>
 				</xs:sequence>
-				<xs:anyAttribute
-                   process_contents="lax"
-                   namespace="##any"
-       />
+				<xs:anyAttribute namespace="##any" />
 			</xs:complexType>
 		</xs:schema>
 
@@ -813,14 +807,12 @@
 
 			<xs:complexType name="QueryListType">
 				<xs:sequence>
-					<xs:element name="Query" type="wsman:QueryType"
-                     minoccurs="1" maxoccurs="unbounded" />
+					<xs:element name="Query" type="wsman:QueryType" />
 				</xs:sequence>
 			</xs:complexType>
 			<xs:complexType name="QueryType">
 				<xs:sequence>
-					<xs:element name="Select" type="wsman:SelectType"
-                     minoccurs="1" maxoccurs="unbounded" />
+					<xs:element name="Select" type="wsman:SelectType" />
 				</xs:sequence>
 				<xs:attribute name="Id" type="xs:integer" />
 			</xs:complexType>
@@ -831,6 +823,11 @@
 					</xs:extension>
 				</xs:simpleContent>
 			</xs:complexType>
+
+			<xs:element name="Shell" type="wsman:Shell" />
+			<xs:element name="Any" type="wst:AnyXmlType" />
+			<xs:element name="OptionalAny" type="wst:AnyXmlType" />
+			<xs:element name="CreateResponse" type="wst:CreateResponseType" />
 
 			<xs:element name="CommandLine" type="wsman:CommandLine" />
 			<xs:element name="CommandResponse" type="wsman:CommandResponse" />
@@ -847,15 +844,18 @@
 	<!-- Common messages -->
 	<wsdl:message name="EmptyMessage" />
 	<wsdl:message name="AnyXmlMessage">
-		<wsdl:part name="body" type="wst:AnyXmlType" />
+		<wsdl:part name="body" element="wsman:Any" />
 	</wsdl:message>
 	<wsdl:message name="OptionalXmlMessage">
-		<wsdl:part name="body" type="wst:AnyXmlOptionalType" />
+		<wsdl:part name="body" element="wsman:OptionalAny" />
 	</wsdl:message>
 
 	<!-- Specific messages -->
+	<wsdl:message name="CreateRequestMessage">
+		<wsdl:part name="body" element="wsman:Shell" />
+	</wsdl:message>
 	<wsdl:message name="CreateResponseMessage">
-		<wsdl:part name="body" type="wst:CreateResponseType" />
+		<wsdl:part name="body" element="wsman:CreateResponse" />
 	</wsdl:message>
 	<wsdl:message name="SubscribeMsg" >
 		<wsdl:part name="body" element="wse:Subscribe" />
@@ -926,7 +926,7 @@
 			<wsdl:output message="wsman:OptionalXmlMessage" wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/DeleteResponse" />
 		</wsdl:operation>
 		<wsdl:operation name="Create">
-			<wsdl:input message="wsman:AnyXmlMessage" wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/Create" />
+			<wsdl:input message="wsman:CreateRequestMessage" wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/Create" />
 			<wsdl:output message="wsman:CreateResponseMessage" wsa:Action="http://schemas.xmlsoap.org/ws/2004/09/transfer/CreateResponse" />
 		</wsdl:operation>
 		<wsdl:operation name="Subscribe" >

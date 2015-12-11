@@ -48,6 +48,9 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/wsdl/winRM.wsdl</wsdl>
+                                    <extraargs>
+                                        <extraarg>-validate</extraarg>
+                                    </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>
