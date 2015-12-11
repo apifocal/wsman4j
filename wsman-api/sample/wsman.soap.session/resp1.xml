@@ -1,0 +1,31 @@
+
+<s:Envelope xml:lang="en-US" xmlns:s="http://www.w3.org/2003/05/soap-envelope" xmlns:a="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:x="http://schemas.xmlsoap.org/ws/2004/09/transfer" xmlns:w="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd" xmlns:rsp="http://schemas.microsoft.com/wbem/wsman/1/windows/shell" xmlns:p="http://schemas.microsoft.com/wbem/wsman/1/wsman.xsd">
+	<s:Header>
+		<a:Action>http://schemas.xmlsoap.org/ws/2004/09/transfer/CreateResponse</a:Action>
+		<a:MessageID>uuid:86F86181-EE3C-4466-8C39-7EE06C72C4B2</a:MessageID>
+		<a:To>http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous</a:To>
+		<a:RelatesTo>uuid:716f1a05-8d08-4a96-aaa2-49160f576e0a</a:RelatesTo>
+	</s:Header>
+	<s:Body>
+		<x:ResourceCreated>
+			<a:Address>http://windows-host:5985/wsman</a:Address>
+			<a:ReferenceParameters>
+				<w:ResourceURI>http://schemas.microsoft.com/wbem/wsman/1/windows/shell/cmd</w:ResourceURI>
+				<w:SelectorSet>
+					<w:Selector Name="ShellId">17C45B31-ACBE-48A2-A77D-AAA9518C13AA</w:Selector>
+				</w:SelectorSet>
+			</a:ReferenceParameters>
+		</x:ResourceCreated>
+		<rsp:Shell xmlns:rsp="http://schemas.microsoft.com/wbem/wsman/1/windows/shell">
+			<rsp:ShellId>17C45B31-ACBE-48A2-A77D-AAA9518C13AA</rsp:ShellId>
+			<rsp:ResourceUri>http://schemas.microsoft.com/wbem/wsman/1/windows/shell/cmd</rsp:ResourceUri>
+			<rsp:Owner>chris</rsp:Owner>
+			<rsp:ClientIP>127.0.0.1</rsp:ClientIP>
+			<rsp:IdleTimeOut>PT7200.000S</rsp:IdleTimeOut>
+			<rsp:InputStreams>stdin</rsp:InputStreams>
+			<rsp:OutputStreams>stdout stderr</rsp:OutputStreams>
+			<rsp:ShellRunTime>P0DT0H0M0S</rsp:ShellRunTime>
+			<rsp:ShellInactivity>P0DT0H0M0S</rsp:ShellInactivity>
+		</rsp:Shell>
+	</s:Body>
+</s:Envelope>
