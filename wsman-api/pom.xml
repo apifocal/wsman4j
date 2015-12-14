@@ -47,7 +47,7 @@
                             <sourceRoot>${project.build.directory}/generated-sources/cxf</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>${basedir}/src/main/resources/wsdl/winRM.wsdl</wsdl>
+                                    <wsdl>${basedir}/src/main/resources/wsdl/WinRM.wsdl</wsdl>
                                     <extraargs>
                                         <extraarg>-validate</extraarg>
                                     </extraargs>
