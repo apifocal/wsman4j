@@ -15,8 +15,9 @@
  */
 package org.apifocal.wsman.cli;
 
-import java.util.Map;
-import javax.xml.ws.BindingProvider;
+import org.apache.cxf.configuration.security.AuthorizationPolicy;
+import org.apache.cxf.endpoint.Client;
+import org.apache.cxf.transport.http.HTTPConduit;
 
 public enum Transport 
 {
@@ -27,27 +28,24 @@ public enum Transport
 
 interface ITransport
 {
-    public void setupAuth(BindingProvider bindingProvider);
+    public void setupAuth(Client client);
 }
 
 class BasicAuth implements ITransport
 {
-    private final String username;
-    private final String password;
-    
+    private AuthorizationPolicy auth;
+
     public BasicAuth(String username, String password) {
-        this.username = username;
-        this.password = password;        
+        // like the spring beans at http://cxf.apache.org/docs/client-http-transport-including-ssl-support.html
+        auth = new AuthorizationPolicy();
+        auth.setUserName(username);
+        auth.setPassword(password);
+        auth.setAuthorizationType("Basic"); // FIXME: use a CXF constant instead
     }
     
     @Override
-    public void setupAuth(BindingProvider bindingProvider) {
-        Map<String, Object> requestContext = bindingProvider.getRequestContext();
-        requestContext.put(BindingProvider.USERNAME_PROPERTY, username);
-        requestContext.put(BindingProvider.PASSWORD_PROPERTY, password);                
-        
-        //HTTP headers
-//       Map<String, List<String>> headers = new HashMap<String, List<String>>();
-//       requestContext.put(MessageContext.HTTP_REQUEST_HEADERS, headers);        
+    public void setupAuth(Client client) {
+        HTTPConduit httpConduit = (HTTPConduit) client.getConduit();
+        httpConduit.setAuthorization(auth);
     }    
 }

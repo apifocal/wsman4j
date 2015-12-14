@@ -16,7 +16,6 @@ import javax.xml.bind.JAXBException;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.namespace.QName;
-import javax.xml.ws.BindingProvider;
 import org.apache.cxf.common.util.Base64Exception;
 import org.apache.cxf.common.util.Base64Utility;
 
@@ -211,9 +210,7 @@ public class Protocol {
         proxy.getRequestContext().put(Header.HEADER_LIST, soapHeaders);
         proxy.getRequestContext().put("SOAPAction", actionURI);
 
-        //configure authentication
-        BindingProvider bindingProvider = ((BindingProvider) wsmanService);        
-        transport.setupAuth(bindingProvider);
+        transport.setupAuth(proxy);
     }
 
     private List<Header> getSOAPHeaders(String actionURI, String resourceURI, String shellId, String messageId, HashMap<String, String> options) {
