@@ -3,10 +3,10 @@
 	downloaded from https://msdn.microsoft.com/en-us/library/dd366131.aspx 
 -->
 <wsdl:definitions
-     targetNamespace="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd"
+     targetNamespace="http://schemas.microsoft.com/wbem/wsman/1/windows/shell"
      xmlns:cfg="http://schemas.microsoft.com/wbem/wsman/1/config"
      xmlns:wsmanfault="http://schemas.microsoft.com/wbem/wsman/1/wsmanfault"
-     xmlns:wsman="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd"
+     xmlns:wsman="http://schemas.microsoft.com/wbem/wsman/1/windows/shell"
      xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing"
      xmlns:wst="http://schemas.xmlsoap.org/ws/2004/09/transfer"
      xmlns:wse="http://schemas.xmlsoap.org/ws/2004/08/eventing"
@@ -592,8 +592,8 @@
 
 		<xs:schema attributeFormDefault="qualified"
         elementFormDefault="qualified"
-        targetNamespace="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd"
-        xmlns:wsman="http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd"
+        targetNamespace="http://schemas.microsoft.com/wbem/wsman/1/windows/shell"
+        xmlns:wsman="http://schemas.microsoft.com/wbem/wsman/1/windows/shell"
         xmlns:wsmanfault="http://schemas.microsoft.com/wbem/wsman/1/config/service/wsmanfault"
         xmlns:tns="http://www.w3.org/2003/05/soap-envelope"
         xmlns:cfg="http://schemas.microsoft.com/wbem/wsman/1/config">
