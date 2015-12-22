@@ -57,21 +57,21 @@ import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
  */
 public class Protocol {
 
-    private final WSMAN wsmanService;
-    private final ITransport transport;
+    final WSMAN wsmanService;
+    final ITransport transport;
 
-    private static final String URI_ACTION_CREATE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Create";
-    private static final String URI_ACTION_DELETE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Delete";
-    private static final String URI_ROLE_ANONYMOUS = "http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous";
-    private static final String URI_WSMAN_XSD = "http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd";
-    private static final String URI_RESOURCE_SHELL_CMD = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/cmd";
-    private static final String URI_ACTION_SHELL_COMMAND = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Command";
-    private static final String URI_ACTION_SHELL_RECEIVE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Receive";
-    private static final String URI_ACTION_SHELL_SIGNAL = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Signal";
-    private static final String URI_SHELL_CODE_TERMINATE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/signal/terminate";
-    private static final String COMMAND_STATE_DONE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/CommandState/Done";
-    //private static final String COMMAND_STATE_RUNNING = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/CommandState/Running";
-    private static final String MUST_UNDERSTAND = "mustUnderstand";
+    static final String URI_ACTION_CREATE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Create";
+    static final String URI_ACTION_DELETE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Delete";
+    static final String URI_ROLE_ANONYMOUS = "http://schemas.xmlsoap.org/ws/2004/08/addressing/role/anonymous";
+    static final String URI_WSMAN_XSD = "http://schemas.dmtf.org/wbem/wsman/1/wsman.xsd";
+    static final String URI_RESOURCE_SHELL_CMD = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/cmd";
+    static final String URI_ACTION_SHELL_COMMAND = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Command";
+    static final String URI_ACTION_SHELL_RECEIVE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Receive";
+    static final String URI_ACTION_SHELL_SIGNAL = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/Signal";
+    static final String URI_SHELL_CODE_TERMINATE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/signal/terminate";
+    static final String COMMAND_STATE_DONE = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/CommandState/Done";
+    //static final String COMMAND_STATE_RUNNING = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/CommandState/Running";
+    static final String MUST_UNDERSTAND = "mustUnderstand";
 
     public Protocol(URL url, ITransport transport) {
         final JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
@@ -105,8 +105,9 @@ public class Protocol {
 
         //ws call
         CreateResponseType response = wsmanService.create(shell);
-
-        return "0"; //@TODO@ get shellId (from response)
+        
+        Shell sh = (Shell)response.getAny();
+        return sh.getShellId(); //@TODO@ get shellId (from response)
     }
 
     public String runCommand(String shellId, String command, String[] args) {
@@ -202,7 +203,7 @@ public class Protocol {
         AnyXmlType response = wsmanService.delete();
     }
 
-    private void prepareRequest(String actionURI, String shellId, String messageId, HashMap<String, String> options) {
+    void prepareRequest(String actionURI, String shellId, String messageId, HashMap<String, String> options) {
         //add SOAP headers
         List<Header> soapHeaders = getSOAPHeaders(actionURI, URI_RESOURCE_SHELL_CMD, shellId, messageId, options);
 
@@ -213,7 +214,7 @@ public class Protocol {
         transport.setupAuth(proxy);
     }
 
-    private List<Header> getSOAPHeaders(String actionURI, String resourceURI, String shellId, String messageId, HashMap<String, String> options) {
+    List<Header> getSOAPHeaders(String actionURI, String resourceURI, String shellId, String messageId, HashMap<String, String> options) {
         List<Header> headersList = new ArrayList<>();
 
         try {
