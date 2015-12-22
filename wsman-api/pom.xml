@@ -49,7 +49,7 @@
                                 <wsdlOption>
                                     <wsdl>${basedir}/src/main/resources/wsdl/WinRM.wsdl</wsdl>
                                     <extraargs>
-                                        <extraarg>-validate</extraarg>
+<!--                                        <extraarg>-validate</extraarg>-->
                                     </extraargs>
                                 </wsdlOption>
                             </wsdlOptions>

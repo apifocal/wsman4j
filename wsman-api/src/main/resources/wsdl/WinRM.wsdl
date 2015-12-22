@@ -855,7 +855,10 @@
 		<wsdl:part name="body" element="wsman:Shell" />
 	</wsdl:message>
 	<wsdl:message name="CreateResponseMessage">
-		<wsdl:part name="body" element="wsman:CreateResponse" />
+                <wsdl:part name="body" type="wst:CreateResponseType" />
+<!--		<wsdl:part name="body" element="wsman:CreateResponse" />-->
+<!--		<wsdl:part name="body" element="wst:ResourceCreated" />
+		<wsdl:part name="details" element="wsman:Shell" />-->
 	</wsdl:message>
 	<wsdl:message name="SubscribeMsg" >
 		<wsdl:part name="body" element="wse:Subscribe" />
