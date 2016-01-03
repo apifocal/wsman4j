@@ -91,7 +91,7 @@
                 </executions>
             </plugin>
 
-            <!--             additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl 
+            <!-- additional jaxb/xjc processing is required to generate proxies for non-normative elements in our wsdl 
             <plugin>
                 <groupId>org.jvnet.jaxb2.maven2</groupId>
                 <artifactId>maven-jaxb2-plugin</artifactId>
@@ -132,7 +132,44 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+              <artifactId>maven-jar-plugin</artifactId>
+              <configuration>
+                <archive>
+                  <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                </archive>
+              </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <id>bundle-manifest</id>
+                        <phase>process-classes</phase>
+                        <goals>
+                            <goal>manifest</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <supportedProjectTypes>
+                        <supportedProjectType>jar</supportedProjectType>
+                    </supportedProjectTypes>
+                    <instructions>
+                        <Export-Package>
+                            com.microsoft.schemas.wbem.wsman.*,
+                            org.dmtf.schemas.wbem.*,
+                            org.w3.*,
+                            org.xmlsoap.schemas.ws.*,
+                        </Export-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
             
         </plugins>
-    </build>    
+    </build>
+
 </project>
