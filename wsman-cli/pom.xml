@@ -89,6 +89,17 @@
                     </instructions>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <systemPropertyVariables>
+                        <winrm.host>${winrm.test.host}</winrm.host>
+                        <winrm.port>${winrm.test.port}</winrm.port>
+                        <winrm.user>${winrm.test.user}</winrm.user>
+                        <winrm.pass>${winrm.test.pass}</winrm.pass>
+                    </systemPropertyVariables>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 

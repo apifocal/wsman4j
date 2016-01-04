@@ -15,6 +15,11 @@
         <maven.compiler.target>1.7</maven.compiler.target>
 
         <cxf.version>3.1.4</cxf.version>
+
+        <winrm.test.host>localhost</winrm.test.host>
+        <winrm.test.port>5985</winrm.test.port>
+        <winrm.test.user>Administrator</winrm.test.user>
+        <winrm.test.pass>1234</winrm.test.pass>
     </properties>
 
     <organization>
@@ -38,6 +43,10 @@
     <build>
         <pluginManagement>
             <plugins>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.19</version>
+                </plugin>
                 <plugin>
                     <artifactId>maven-jar-plugin</artifactId>
                     <version>2.6</version>

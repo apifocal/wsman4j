@@ -31,21 +31,16 @@ package org.apifocal.wsman.cli;
  * &lt;/properties&gt;
  * ......
  * &lt;plugin&gt;
- *      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
- *      &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
- *      &lt;configuration&gt;
- *         &lt;systemProperties&gt;
- *           &lt;property&gt;
- *              &lt;name&gt;winrm.host&lt;/name&gt;
- *              &lt;value&gt;${winrm.host}&lt;/value&gt;
- *           &lt;/property&gt;
- *           &lt;property&gt;
- *              &lt;name&gt;winrm.port&lt;/name&gt;
- *              &lt;value&gt;${winrm.port}&lt;/value&gt;
- *           &lt;/property&gt;
- *           ......
- *         &lt;/systemProperties&gt;
- *      &lt;/configuration&gt;
+ *     &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+ *     &lt;artifactId&gt;maven-surefire-plugin&lt;/artifactId&gt;
+ *     &lt;configuration&gt;
+ *         &lt;systemPropertyVariables&gt;
+ *             &lt;winrm.host&gt;${winrm.test.host}&lt;/winrm.host&gt;
+ *             &lt;winrm.port&gt;${winrm.test.port}&lt;/winrm.port&gt;
+ *             &lt;winrm.user&gt;${winrm.test.user}&lt;/winrm.user&gt;
+ *             &lt;winrm.pass&gt;${winrm.test.pass}&lt;/winrm.pass&gt;
+ *         &lt;/systemPropertyVariables&gt;
+ *     &lt;/configuration&gt;
  * &lt;/plugin&gt;
  * </code>
  *
@@ -58,13 +53,13 @@ public class SyspropsWinRMFixture implements WinRMFixture {
     @Override
     public WsmanCli createClient() {
         WsmanCli cli = new WsmanCli();
-        cli.host = System.getProperty(WINRM_HOST);
-        cli.port = Integer.parseInt(System.getProperty(WINRM_PORT));
-        cli.user = System.getProperty(WINRM_USER);
-        cli.pass = System.getProperty(WINRM_PASS);
+        cli.host = System.getProperty(WINRM_HOST, "localhost");
+        cli.port = Integer.parseInt(System.getProperty(WINRM_PORT, "5985"));
+        cli.user = System.getProperty(WINRM_USER, "Administrator");
+        cli.pass = System.getProperty(WINRM_PASS, "1234");
         cli.transport = Transport.plaintext;
-        //cli.cmd = prop.getProperty("cmd");
-        //cli.cmdArgs = Arrays.asList(prop.getProperty("cmdArgs").split(" "));
+        //cli.cmd = System.getProperty("cmd", "");
+        //cli.cmdArgs = Arrays.asList(System.getProperty("cmdArgs", "").split(" "));
 
         return cli;
     }

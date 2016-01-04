@@ -24,9 +24,7 @@ import java.util.Scanner;
 import java.util.UUID;
 import javax.xml.bind.JAXB;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
@@ -41,25 +39,27 @@ public class TestWsman {
     public TestWsman() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-        //test is only runnable in a windows host
-        boolean isWindows = System.getProperty("os.name").startsWith("Windows");
-        org.junit.Assume.assumeTrue(isWindows); //failure causes the test to be ignored
+//    @BeforeClass
+//    public static void setUpClass() {
+//        //make sure to configure WinRM prior to running tests
+//    }
 
-        //make sure to configure WinRM prior to running tests
-        //Runtime.getRuntime().exec("cmd /c start setupWinRM.bat");        
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
+//    @AfterClass
+//    public static void tearDownClass() {
+//    }
 
     @Before
     public void setUp() throws Exception {
         // TODO configure the fixture externally
-        WinRMFixture fixture = new PropfileWinRMFixture();
+//        WinRMFixture fixture = new PropfileWinRMFixture();
+        WinRMFixture fixture = new SyspropsWinRMFixture();
         cli = fixture.createClient();
+
+//        if ("localhost".equals(cli.host)) {
+//            //test is only runnable in a windows host
+//            boolean isWindows = System.getProperty("os.name").startsWith("Windows");
+//            assumeTrue("This tests needs a windows host", isWindows); //failure causes the test to be ignored
+//        }
     }
 
     @After
