@@ -8,7 +8,8 @@ import org.apache.cxf.common.util.Base64Utility;
 /**
  * establish a wsman session using a {@link Protocol}
  */
-public class Session {    
+public class Session {
+
     private final Protocol protocol;
 
     public Session(URL url, ITransport transport) {
@@ -24,7 +25,7 @@ public class Session {
         protocol.closeShell(shellId);
         return out;
     }
-    
+
     /* execute a Powershell script (first encode it using base64) */
     public CommandOutput runPs(String script) {
         //@TODO@ must use utf16 little endian on windows

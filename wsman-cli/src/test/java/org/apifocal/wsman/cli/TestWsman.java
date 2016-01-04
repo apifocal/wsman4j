@@ -17,12 +17,9 @@ package org.apifocal.wsman.cli;
 
 import com.microsoft.schemas.wbem.wsman._1.windows.shell.Shell;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.net.URL;
 import java.util.HashMap;
-import java.util.Properties;
 import java.util.Scanner;
 import java.util.UUID;
 import javax.xml.bind.JAXB;
@@ -39,7 +36,7 @@ import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
  */
 public class TestWsman {
 
-    private final WsmanCli cli = new WsmanCli();
+    private WsmanCli cli;
 
     public TestWsman() {
     }
@@ -60,22 +57,9 @@ public class TestWsman {
 
     @Before
     public void setUp() throws Exception {
-        //load user configuration
-        Properties prop = new Properties();
-        InputStream is = getClass().getClassLoader().getResourceAsStream("configTests.properties");
-        if (is != null) {
-            prop.load(is);
-        } else {
-            throw new FileNotFoundException("tests config file missing");
-        }
-
-        cli.host = prop.getProperty("host");
-        cli.port = Integer.parseInt(prop.getProperty("port"));
-        cli.user = prop.getProperty("user");
-        cli.pass = prop.getProperty("pass");
-        cli.transport = Transport.plaintext;
-        //cli.cmd = prop.getProperty("cmd");
-        //cli.cmdArgs = Arrays.asList(prop.getProperty("cmdArgs").split(" "));        
+        // TODO configure the fixture externally
+        WinRMFixture fixture = new PropfileWinRMFixture();
+        cli = fixture.createClient();
     }
 
     @After
@@ -83,8 +67,8 @@ public class TestWsman {
     }
 
     /*
-    * basic test that checks that a command is properly executed by wsman
-    */
+     * basic test that checks that a command is properly executed by wsman
+     */
     @Test
     public void testWsman() throws Exception {
         Session s = cli.createSession();
@@ -96,9 +80,9 @@ public class TestWsman {
     }
 
     /*
-    * make sure that CXF generated code loads the same ws response as pywinrm
-    * compares Shell objects inside ws responses
-    */
+     * make sure that CXF generated code loads the same ws response as pywinrm
+     * compares Shell objects inside ws responses
+     */
     @Test
     public void testCXF() throws Exception {
         //
