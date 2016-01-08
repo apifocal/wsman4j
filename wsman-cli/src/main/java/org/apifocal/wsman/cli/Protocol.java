@@ -58,7 +58,7 @@ import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
 public class Protocol {
 
     final WSMAN wsmanService;
-    final ITransport transport;
+    final Authenticator transport;
 
     static final String URI_ACTION_CREATE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Create";
     static final String URI_ACTION_DELETE = "http://schemas.xmlsoap.org/ws/2004/09/transfer/Delete";
@@ -73,7 +73,7 @@ public class Protocol {
     //static final String COMMAND_STATE_RUNNING = "http://schemas.microsoft.com/wbem/wsman/1/windows/shell/CommandState/Running";
     static final String MUST_UNDERSTAND = "mustUnderstand";
 
-    public Protocol(URL url, ITransport transport) {
+    public Protocol(URL url, Authenticator transport) {
         final JaxWsProxyFactoryBean factory = new JaxWsProxyFactoryBean();
         factory.setServiceClass(WSMAN.class);
         factory.setAddress(url.toString());

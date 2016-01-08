@@ -42,7 +42,7 @@ public class PropfileWinRMFixture implements WinRMFixture {
         cli.port = Integer.parseInt(prop.getProperty(WINRM_PORT));
         cli.user = prop.getProperty(WINRM_USER);
         cli.pass = prop.getProperty(WINRM_PASS);
-        cli.transport = Transport.plaintext;
+        cli.transport = Transport.PLAINTEXT;
         //cli.cmd = prop.getProperty(WINRM_CMD);
         //cli.cmdArgs = Arrays.asList(prop.getProperty(WINRM_CMDARGS).split(" "));
 

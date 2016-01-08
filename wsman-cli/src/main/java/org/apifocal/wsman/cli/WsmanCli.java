@@ -44,7 +44,7 @@ public class WsmanCli {
     public String pass;
 
     @Option(name = "-transport", usage = "Sets a transport")
-    public Transport transport = Transport.plaintext;
+    public Transport transport = Transport.PLAINTEXT;
 
     @Option(name = "-cmd", usage = "Sets a command")
     public String cmd;
@@ -56,19 +56,19 @@ public class WsmanCli {
     public String ps = null;
 
     public Session createSession() throws MalformedURLException {
-        final String protocol = transport == Transport.ssl ? "https" : "http";
+        final String scheme = transport.getScheme();
         if (port == 0) {
-            port = transport == Transport.ssl ? 5986 : 9985;
+            port = transport.getPort();
         }
 
-        URL endpoint = new URL(protocol, host, port, "/wsman");
+        URL endpoint = new URL(scheme, host, port, "/wsman");
 
         System.out.println("Connecting to " + endpoint.toString());
 
         //@TODO@ - support SSL and Kerberos too
-        ITransport transport = new BasicAuth(user, pass);
+        Authenticator auth = new HttpBasicAuthenticator(user, pass);
         
-        Session s = new Session(endpoint, transport);
+        Session s = new Session(endpoint, auth);
 
         return s;
     }

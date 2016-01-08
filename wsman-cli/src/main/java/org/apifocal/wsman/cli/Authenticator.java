@@ -1,5 +1,5 @@
 /*
- * Copyright 2015 apifocal.
+ * Copyright 2016 apifocal.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,31 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.apifocal.wsman.cli;
 
-public enum Transport 
-{
-    PLAINTEXT, 
-    SSL, 
-    KERBEROS;
+import org.apache.cxf.endpoint.Client;
 
-    static {
-        PLAINTEXT.port = 9985;
-        PLAINTEXT.scheme = "http";
+/**
+ * The authenticator for Wsman requests.
+ */
+public interface Authenticator {
 
-        SSL.port = 5986;
-        SSL.scheme = "https";
-    }
+    public void setupAuth(Client client);
 
-    private int port;
-    private String scheme;
-
-    public int getPort() {
-        return port;
-    }
-    public String getScheme() {
-        return scheme;
-    }
-
-};
-
+}

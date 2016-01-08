@@ -12,7 +12,7 @@ public class Session {
 
     private final Protocol protocol;
 
-    public Session(URL url, ITransport transport) {
+    public Session(URL url, Authenticator transport) {
         protocol = new Protocol(url, transport);
     }
 

@@ -95,7 +95,7 @@ public class WinRMIT {
         //compare with same request executed with wsman
         //                
         URL url = new URL("http", cli.host, cli.port, "/wsman");
-        ITransport transport = new BasicAuth(cli.user, cli.pass);
+        Authenticator transport = new HttpBasicAuthenticator(cli.user, cli.pass);
 
         //create protocol
         Protocol protocol = new Protocol(url, transport);

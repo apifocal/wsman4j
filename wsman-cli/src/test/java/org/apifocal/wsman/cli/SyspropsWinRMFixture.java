@@ -57,7 +57,7 @@ public class SyspropsWinRMFixture implements WinRMFixture {
         cli.port = Integer.parseInt(System.getProperty(WINRM_PORT, "5985"));
         cli.user = System.getProperty(WINRM_USER, "Administrator");
         cli.pass = System.getProperty(WINRM_PASS, "1234");
-        cli.transport = Transport.plaintext;
+        cli.transport = Transport.PLAINTEXT;
         //cli.cmd = System.getProperty("cmd", "");
         //cli.cmdArgs = Arrays.asList(System.getProperty("cmdArgs", "").split(" "));
 
