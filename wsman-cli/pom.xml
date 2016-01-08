@@ -12,6 +12,10 @@
     <name>WSMan4j :: CLI</name>
     
     <packaging>jar</packaging>
+
+    <properties>
+        <skipITs>true</skipITs>
+    </properties>
     
     <dependencies>
         <dependency>
@@ -60,12 +64,12 @@
     <build>
         <plugins>
             <plugin>
-              <artifactId>maven-jar-plugin</artifactId>
-              <configuration>
-                <archive>
-                  <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                </archive>
-              </configuration>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
+                    </archive>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.felix</groupId>
@@ -90,7 +94,7 @@
                 </configuration>
             </plugin>
             <plugin>
-                <artifactId>maven-surefire-plugin</artifactId>
+                <artifactId>maven-failsafe-plugin</artifactId>
                 <configuration>
                     <systemPropertyVariables>
                         <winrm.host>${winrm.test.host}</winrm.host>
@@ -98,7 +102,16 @@
                         <winrm.user>${winrm.test.user}</winrm.user>
                         <winrm.pass>${winrm.test.pass}</winrm.pass>
                     </systemPropertyVariables>
+                    <skipITs>${skipITs}</skipITs>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

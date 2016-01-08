@@ -32,11 +32,11 @@ import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
 /**
  *
  */
-public class TestWsman {
+public class WinRMIT {
 
     private WsmanCli cli;
 
-    public TestWsman() {
+    public WinRMIT() {
     }
 
 //    @BeforeClass
