@@ -30,7 +30,12 @@ import static org.junit.Assert.*;
 import org.xmlsoap.schemas.ws._2004._09.transfer.CreateResponseType;
 
 /**
+ * Tests WsmanCli against a running WinRM service.
  *
+ * You'll need to provide the appropriate machine and pass it as a
+ * {@link WinRMFixture} via system properties.
+ *
+ * @todo Document usage of integration tests.
  */
 public class WinRMIT {
 
@@ -43,11 +48,9 @@ public class WinRMIT {
 //    public static void setUpClass() {
 //        //make sure to configure WinRM prior to running tests
 //    }
-
 //    @AfterClass
 //    public static void tearDownClass() {
 //    }
-
     @Before
     public void setUp() throws Exception {
         // TODO configure the fixture externally
